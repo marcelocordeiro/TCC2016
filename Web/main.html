@@ -16,6 +16,7 @@
     <link rel="icon" href="icons/github.ico">
 
     <title>Marcelo Cordeiro - Software Developer</title>
+
   </head>
   <body>
 
@@ -28,11 +29,17 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">TCC 2016</a>
+          <a class="navbar-brand" href="main.html">TCC 2016</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
           <ul class="nav navbar-nav">
-            <li><a href="#mapas">Mapas</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mapas<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Gerenciar Mapas</a></li>
+                <li><a href="new_map.html">Criar Novo Mapa</a></li>
+              </ul>
+            </li>
             <li><a href="#dispositivos">Dispositivos</a></li>
             <li><a href="#sobre">Sobre o Projeto</a></li>
           </ul>
@@ -44,7 +51,7 @@
     </nav>
 
     <div class="container">
-      <p style="text-align:center;">Construction Zone</p>
+
     </div>
 
     <footer>
@@ -54,6 +61,8 @@
         </div>
       </div>
     </footer>
+
+
 
   </body>
 </html>
