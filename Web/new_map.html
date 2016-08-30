@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="Marcelo Augusto Cordeiro">
+    <meta name="theme-color" content="#222222">
+    <script src="Scripts/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="Scripts/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="Scripts/main.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="Styles/bootstrap.min.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="Styles/bootstrap-social.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="Styles/font-awesome.min.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="Styles/main.css" type="text/css" charset="utf-8">
+    <link rel="icon" href="icons/github.ico">
+
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.18.1/css/ol.css" type="text/css">
+    <script src="http://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="http://openlayers.org/en/v3.18.1/build/ol.js"></script>
+
+    <title>Marcelo Cordeiro - Software Developer</title>
+
+  </head>
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="main.html">TCC 2016</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mapas<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Gerenciar Mapas</a></li>
+                <li><a href="new_map.html">Criar Novo Mapa</a></li>
+              </ul>
+            </li>            <li><a href="#dispositivos">Dispositivos</a></li>
+            <li><a href="#sobre">Sobre o Projeto</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <a class="btn navbar-btn btn-social btn-github" href="https://github.com/marcelocordeiro" target="_blank"><span class="fa fa-github"></span> View on GitHub</a>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <!-- <canvas id="canvas" width="1000" height="500">
+        This text is displayed if your browser does not support HTML5 Canvas.
+      </canvas> -->
+      <div id="map" class="map"></div>
+        <form class="form-inline">
+          <label>Geometry type &nbsp;</label>
+          <select id="type">
+            <option value="Box">Retângulo</option>
+            <option value="Square">Quadrado</option>
+            <option value="Polygon">Polígono</option>
+          </select>
+        </form>
+    </div>
+
+    <script>
+      var raster = new ol.layer.Tile({
+        source: new ol.source.OSM()
+      });
+
+      var source = new ol.source.Vector({wrapX: false});
+
+      var vector = new ol.layer.Vector({
+        source: source,
+        style: new ol.style.Style({
+          fill: new ol.style.Fill({
+            color: 'rgba(255, 255, 255, 0.2)'
+          }),
+          stroke: new ol.style.Stroke({
+            color: '#ffcc33',
+            width: 2
+          }),
+          image: new ol.style.Circle({
+            radius: 7,
+            fill: new ol.style.Fill({
+              color: '#ffcc33'
+            })
+          })
+        })
+      });
+
+      var map = new ol.Map({
+        layers: [vector],
+        target: 'map',
+        view: new ol.View({
+          center: [-11000000, 4600000],
+          zoom: 4
+        })
+      });
+
+      var typeSelect = document.getElementById('type');
+
+      var draw; // global so we can remove it later
+      function addInteraction() {
+        var value = typeSelect.value;
+        if (value !== 'None') {
+          var geometryFunction, maxPoints;
+          if (value === 'Square') {
+            value = 'Circle';
+            geometryFunction = ol.interaction.Draw.createRegularPolygon(4);
+          } else if (value === 'Box') {
+            value = 'LineString';
+            maxPoints = 2;
+            geometryFunction = function(coordinates, geometry) {
+              if (!geometry) {
+                geometry = new ol.geom.Polygon(null);
+              }
+              var start = coordinates[0];
+              var end = coordinates[1];
+              geometry.setCoordinates([
+                [start, [start[0], end[1]], end, [end[0], start[1]], start]
+              ]);
+              return geometry;
+            };
+          }
+          draw = new ol.interaction.Draw({
+            source: source,
+            type: /** @type {ol.geom.GeometryType} */ (value),
+            geometryFunction: geometryFunction,
+            maxPoints: maxPoints
+          });
+          map.addInteraction(draw);
+        }
+      }
+
+
+      /**
+       * Handle change event.
+       */
+      typeSelect.onchange = function() {
+        map.removeInteraction(draw);
+        addInteraction();
+      };
+
+      addInteraction();
+    </script>
+
+    <footer>
+      <div class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
+        <div class="container">
+          <p class="navbar-text">Marcelo Augusto Cordeiro© - 2016</p>
+        </div>
+      </div>
+    </footer>
+
+
+
+  </body>
+</html>
