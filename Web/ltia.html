@@ -9,6 +9,7 @@
     <script src="Scripts/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="Scripts/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="Scripts/main.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="Scripts/plotly.min.js"></script>
     <link rel="stylesheet" href="Styles/bootstrap.min.css" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="Styles/bootstrap-social.css" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="Styles/font-awesome.min.css" type="text/css" charset="utf-8">
@@ -95,6 +96,8 @@
           </tr>
         </tbody>
       </table>
+
+      <div id="myDiv"></div>
     </div>
 
     <footer>
@@ -105,7 +108,17 @@
       </div>
     </footer>
 
+    <script>
+      var data = [
+      {
+        z: [[1, 20, 30, 50, 1], [20, 1, 60, 80, 30], [30, 60, 1, -10, 20]],
+        x: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        y: ['Morning', 'Afternoon', 'Evening'],
+        type: 'heatmap'
+      }];
 
+      Plotly.newPlot('myDiv', data);
+    </script>
 
   </body>
 </html>
