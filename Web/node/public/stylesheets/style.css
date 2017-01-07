@@ -1,0 +1,21 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+a.footer {
+    font-size: .8em;
+    text-decoration: none;
+}
+
+p.header {
+    margin-bottom: 50px;
+}
+
+button.count {
+    font-size: 1em;
+}
