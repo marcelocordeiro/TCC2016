@@ -7,6 +7,7 @@ var express = require('express'),
     pug = require('pug'),
     path = require('path'),
     home = require('./routes/home');
+    AWS = require('aws-sdk');
 
 var app = express();
 
