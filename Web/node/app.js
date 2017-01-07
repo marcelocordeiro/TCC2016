@@ -3,7 +3,7 @@
  */
 
 // Module dependencies.
-var express = require(‘express'),
+var express = require('express'),
     pug = require('pug'),
     path = require('path'),
     home = require('./routes/home');
