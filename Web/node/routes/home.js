@@ -3,5 +3,6 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', {title: 'Using EclairJS to Count Words in a File'});
+    req.
+    res.render('index', {title: 'Using EclairJS to Count Words in a File', results: 'test'});
 };
