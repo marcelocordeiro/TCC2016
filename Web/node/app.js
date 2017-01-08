@@ -13,7 +13,7 @@ var app = express();
 
 // Setup the application's environment.
 app.set('port',  process.env._EJS_APP_PORT || 3000);
-app.set('host',  process.env.EJS_APP_HOST || 'localhost');
+app.set('host',  process.env.EJS_APP_HOST || 'ec2-52-67-25-14.sa-east-1.compute.amazonaws.com');
 app.set('view engine', 'pug');
 app.set('views', __dirname + '/views');
 app.use(express.static(path.join(__dirname, 'public')));
