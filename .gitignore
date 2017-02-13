@@ -1,6 +1,2 @@
-### WebStorm ###
-# User-specific stuff:
-.idea/*
-
 **/node_modules/**
 *.log
