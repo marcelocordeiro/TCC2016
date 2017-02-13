@@ -5,8 +5,13 @@
   "main": "app.js",
   "dependencies": {
     "aws-sdk": "^2.7.21",
+    "body-parser": "^1.16.1",
+    "bootstrap": "^3.3.7",
     "eclairjs": "^0.9",
+    "ejs": "^2.5.5",
     "express": "~4.14.0",
+    "mysql": "^2.13.0",
+    "node-mysql": "^0.4.2",
     "pug": "*"
   }
 }
